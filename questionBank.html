@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <center>
+        <img src="logo.png" width="300" height="250"/>
+    </center>
+    <title>Study Buddy Question Bank</title>
+    <link rel="stylesheet" href="csl.css" id="styleSheet">
+</head>
+<body>
+    <center>
+    <nav>
+        <a href="index.html">Home Page</a> |
+        <a href="flashcards.html">Flashcards</a> |
+        <a href="questions.html">Create Questions</a> |
+        <a href="testpage.html">Generate Test</a> |
+        <a href="missedQuestions.html">Missed Questions</a> | 
+        <a href="questionBank.html">Question Bank</a>
+    </nav>
+    
+    <h2>Question Bank</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Correct Answer</th>
+                <th>Unit</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Question 1</td>
+                <td>Answer 1</td>
+                <td>Unit 1</td>
+                <td>
+                    <form action="updateQuestion.html">
+                        <input type="hidden" name="questionId" value="1">
+                        <input type="submit" value="Update">
+                    </form>
+                    <form action="deleteQuestion" method="post">
+                        <input type="hidden" name="questionId" value="1">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>Question 2</td>
+                <td>Answer 2</td>
+                <td>Unit 2</td>
+                <td>
+                    <form action="updateQuestion.html">
+                        <input type="hidden" name="questionId" value="2">
+                        <input type="submit" value="Update">
+                    </form>
+                    <form action="deleteQuestion" method="post">
+                        <input type="hidden" name="questionId" value="2">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </center>
+</body>
+</html>
+
