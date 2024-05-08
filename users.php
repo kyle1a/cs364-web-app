@@ -7,7 +7,7 @@
 	$password = "CompSci364";
 	$database = "student";
 
-	$connection = new mysqli("localhost", $username, $password, $database);
+	$conn = new mysqli("localhost", $username, $password, $database);
 
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
@@ -18,16 +18,18 @@
 	$firstName = $conn->real_escape_string($_POST['firstName']);
 	$lastName = $conn->real_escape_string($_POST['lastName']);
 	$type = $conn->real_escape_string($_POST['type']);
+	
 
-	$stmt = $conn->prepare("INSERT INTO users.sql (username, password, first_name, last_name, type) VALUES (?, ?, ?, ?, ?)");
-	$stmt->bind_param("sssss", $username, $password, $firstName, $lastName, $type);
+	$data = array(
+      "INSERT INTO users.sql (firstName, lastName, username, password) VALUES ".
+          "('Ben', 'Riley', 'bpriley', 'password'), ",
+    );
+    
+    
 	
-	if ($stmt->execute()) {
-		echo "User successfully signed up!";
-	} else {
-		echo "Error: " . $stmt->error;
-	}
-	
-	$stmt->close();
 	$conn->close();
 ?>
+<!DOCTYPE html>
+<html>
+<body>
+<center>
