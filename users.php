@@ -9,34 +9,25 @@
 
 	$connection = new mysqli("localhost", $username, $password, $database);
 
-	$tables = <<<SQL
-
-	DROP TABLE Example;  
-	CREATE TABLE IF NOT EXISTS Example  
-	(
-	  firstName VARCHAR(20) NOT NULL,  
-	  lastName VARCHAR(20) NOT NULL,
-	  username VARCHAR(20) NOT NULL,
-	  passwords VARCHAR(20) NOT NULL,
-	  type ENUM NOT NULL,
-
-	  PRIMARY KEY (username),
-	      ON UPDATE RESTRICT ON DELETE RESTRICT  
-	);
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
 	
-	SQL;
-?>
-<!DOCTYPE html>
-<html>
-<body>
-<center>
-	<p>Sign Up Successful!</p><br>
-</center>	
+	$username = $conn->real_escape_string($_POST['username']);
+	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+	$firstName = $conn->real_escape_string($_POST['firstName']);
+	$lastName = $conn->real_escape_string($_POST['lastName']);
+	$type = $conn->real_escape_string($_POST['type']);
 
-	<center>
-	<nav>
-        	<a href="index.html">Home Page</a>
-	</nav>
-	</center>
-</body>
-</html>
+	$stmt = $conn->prepare("INSERT INTO users.sql (username, password, first_name, last_name, type) VALUES (?, ?, ?, ?, ?)");
+	$stmt->bind_param("sssss", $username, $password, $firstName, $lastName, $type);
+	
+	if ($stmt->execute()) {
+		echo "User successfully signed up!";
+	} else {
+		echo "Error: " . $stmt->error;
+	}
+	
+	$stmt->close();
+	$conn->close();
+?>
