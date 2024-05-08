@@ -7,16 +7,16 @@
 	$password = "CompSci364";
 	$database = "student";
 
-	$connection = new mysqli("localhost", $username, $password, $database);
+	$conn = new mysqli("localhost", $username, $password, $database);
 
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
 	$username = $conn->real_escape_string($_POST['username']);
-	$pass = $_POST['password'];
+	$password = $_POST['password'];
 
-	$query = "SELECT username, password FROM users.sql WHERE username = ?"
+	$query = "SELECT username, pass FROM users WHERE username = ?";
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("s", $username);
 	$stmt->execute();
