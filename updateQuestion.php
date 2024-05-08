@@ -2,7 +2,7 @@
 
 	$username = 'student';
 	$password = "CompSci364";
-	$database = "student"
+	$database = "student";
 	
 	$conn = new mysqli("localhost", $username, $password, $database);
 	
@@ -10,15 +10,17 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$unit = $conn->real_escape_string($_POST['unit']);
-	$question = $conn->real_escape_string($_POST['question']);
-	$answer = $conn->real_escape_string($_POST['answer']);
+	$unit = $_POST['unit'];
+	$question = $_POST['question'];
+	$answer = $_POST['answer'];
+	$prevquestion = $_POST['prevquestion'];
 	
-	$stmt = $conn->prepare("UPDATE Questions SET unit = ?, question = ?, answer = ? WHERE question = ?");
-	$stmt->bind_param("sss", $unit, $question, $answer);
+	$stmt = $conn->prepare("UPDATE Questions SET question = ?, answer = ?, unit = ? WHERE question = ?");
+	$stmt->bind_param("ssss", $question, $answer, $unit, $prevquestion);
 	
 	if ($stmt->execute()) {
 		echo "Question successfully updated!";
+		header("Location: questionBank.php");
 	} else {
 		echo "Error: " . $stmt->error;
 	}

@@ -20,7 +20,7 @@ $stmt->bind_param("sss", $question, $answer, $unit);
 // Execute the statement
 if ($stmt->execute()) {
     echo "Question added successfully!";
-    header("Location: missedQuestions.html");
+    header("Location: questionBank.php");
 } else {
     echo "Error: " . $stmt->error;
 }

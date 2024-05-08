@@ -2,7 +2,7 @@
 
 	$username = 'student';
 	$password = "CompSci364";
-	$database = "student"
+	$database = "student";
 	
 	$conn = new mysqli("localhost", $username, $password, $database);
 	
@@ -10,13 +10,17 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$question = $conn->real_escape_string($_POST['question']);
+	$question = $_POST["question"];
+
+	$SQL = "DELETE FROM Questions WHERE question = '$question';";
+    $result = $conn->query($SQL);
 	
-	$stmt = $conn->prepare("DELETE FROM Questions SET WHERE question = ?");
-	$stmt->bind_param("sss", $unit, $question, $answer);
+	$stmt = $conn->prepare("DELETE FROM Questions WHERE question = ?");
+	$stmt->bind_param("s", $question);
 	
 	if ($stmt->execute()) {
 		echo "Question successfully deleted!";
+		header("Location: questionBank.php");
 	} else {
 		echo "Error: " . $stmt->error;
 	}
