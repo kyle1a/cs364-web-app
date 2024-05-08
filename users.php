@@ -1,4 +1,4 @@
-<?php
+?php
 	/* Embedding account credentials isn't ideal...preferable to
 	 * store in a separate file that is included by PHP (and not
 	 * accessible to others)
