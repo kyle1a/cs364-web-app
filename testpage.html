@@ -13,19 +13,20 @@
         <center>
 	<nav>
         	<a href="index.html">Home Page</a> |
+        	<a href="login.html">Log In!</a> |
+        	<a href="signup.html">Sign Up!</a> |
         	<a href="flashcards.html">Flashcards</a> |
         	<a href="questions.html">Create Questions</a> |
         	<a href="testpage.html">Generate Test</a> |
-        	<a href="missedQuestions.html">Missed Questions</a> | 
-   		<a href="questionBank.html">Question Bank</a>
+        	<a href="missedQuestions.html">Missed Questions</a> 
 	</nav>
 			<h2>Generate Test:</h2>
 
-            <form action="test.html">
+            <form action="test.php" method="POST">
                 <label for="unit">Select a Unit:</label>
                 <select name="unit" id="unit">
-                    <option value="unit1">Unit 1</option>
-                    <option value="unit2">Unit 2</option>
+                    <option value="1">Unit 1</option>
+                    <option value="2">Unit 2</option>
                 </select><br><br>
                 
                 <input type="submit" value="Submit">
