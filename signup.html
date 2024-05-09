@@ -1,62 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	<center>
-	<img src="logo.png" width="300" height="250"/>
+<head>
+    <center>
+        <img src="logo.png" width="300" height="250"/>
+    </center>
+    <title>Study Buddy Sign Up</title>
+    <link rel="stylesheet" href="csl.css" id="styleSheet">
+</head>
+<body>
+<center>
+    <nav>
+        <a href="login.html">Log in!</a>
+    </nav>
+    <h2>Study Buddy sign up form:</h2>
+    
+    <form action="users.php" method="post" onsubmit="return validateForm();">
+        <div>
+            <label for="usernameInput">Username:</label>
+            <input id="usernameInput" type="text" name="username" required pattern="^[A-Za-z0-9\-]{1,50}$"/>
+        </div>
+        
+        <br>
+        
+        <div>
+            <label for="passwordInput">Password:</label>
+            <input id="passwordInput" type="password" name="password" required pattern="^[A-Za-z0-9\-]{1,50}$"/>
+        </div>
+        
+        <br>
+        
+        <div>
+            <label for="firstNameInput">First Name:</label>
+            <input id="firstNameInput" type="text" name="firstName" required pattern="^[A-Za-z\s\-]{1,50}$"/>
+        </div>
+        
+        <br>
+        
+        <div>
+            <label for="lastNameInput">Last Name:</label>
+            <input id="lastNameInput" type="text" name="lastName" required pattern="^[A-Za-z\s\-]{1,50}$"/>
+        </div>
+        
+        <br>
+        
+        <div>
+            <label>Student or teacher?</label>
+            <input type="radio" id="student" name="type" value="student" required>
+            <label for="student">Student</label>
+            <input type="radio" id="teacher" name="type" value="teacher" required>
+            <label for="teacher">teacher</label>
+        </div>
+        
+        <br>
+        
+        <input type="submit" value="Submit" />
+    </form>
 </center>
-		<title>Study Buddy Sign Up</title>
-		<link rel="stylesheet" href="csl.css" id="styleSheet">
-    		
-	</head>
-	<body>
-		<center>
-	<nav>
-        	<a href="login.html">Log in!</a>
-	</nav>
-				<h2>Study Buddy sign up form:</h2>
-			
-			<form action = "users.php" method = "post" onsubmit = "return validateForm();">
-				<div>
-						<label for="usernameInput">Username:</label>
-						<input id="usernameInput" type="text" name="username" required pattern="^[A-Za-z0-9\s\-]{1,50}$"/>
-				</div>
-				
-				<br>
-				
-				<div>
-						<label for="passwordInput">Password:</label>
-						<input id="passwordInput" type="password" name="password" required pattern="^[A-Za-z0-9\s\-]{1,50}$"/>
-				</div>
-				
-				<br>
-				
-				<div>
-					<label for="firstNameInput">First Name:</label>
-					<input id="firstNameInput" type="text" name="firstName" required pattern="^[A-Za-z\s\-]{1,50}$"/>
-				</div>
-				
-				<br>
-				
-				<div>
-					<label for="lastNameInput">Last Name:</label>
-					<input id="lastNameInput" type="text" name="lastName" required pattern="^[A-Za-z\s\-]{1,50}$"/>
-				</div>
-				
-				<br>
-				
-				<div>
-						<label>Student or teacher?</label>
-						<input type="radio" id="student" name="type" value="student" required>
-						<label for="student">Student</label>
-						<input type="radio" id="teacher" name="type" value="teacher" required>
-						<label for="teacher">teacher</label>
-				</div>
-				
-				<br>
-				
-					<input type="submit" value="Submit" />
-			</form>
-		</center>
 
-	</body>
+</body>
 </html>
