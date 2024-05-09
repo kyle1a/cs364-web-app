@@ -1,40 +1,51 @@
 <?php
-	/* Embedding account credentials isn't ideal...preferable to
-	 * store in a separate file that is included by PHP (and not
-	 * accessible to others)
-	 */
-	$username = "student";
-	$password = "CompSci364";
-	$database = "student";
+session_start(); // Start (or resume) session
 
-	$conn = new mysqli("localhost", $username, $password, $database);
+// Create database connection ($connection)
+$connection = new mysqli("localhost", "student", "CompSci364", "student");
 
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-	
-	$username = $conn->real_escape_string($_POST['username']);
-	$password = $_POST['password'];
+$error = false;
 
-	$query = "SELECT username, pass FROM users WHERE username = ?";
-	$stmt = $conn->prepare($query);
-	$stmt->bind_param("s", $username);
-	$stmt->execute();
-	$stmt->store_result();
-	
-	if ($stmt->num_rows > 0) {
-	
-		$stmt->bind_result($username, $passwordHash);
-		$stmt->fetch();
-		if (password_verify($pass, $passwordHash)) {
-			echo "Welcome $username!";
-		} else {
-			echo "Invalid password";
-		}
-	} else { 
-		echo "Invalid username";
-	}
-	
-	$stmt->close();
-	$conn->close();
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["password"])) {
+    if (empty($_POST["username"]) || empty($_POST["password"])) {
+        // Username or password is empty
+        $error = true;
+    } else {
+        // Query database for account information
+        $statement = $connection->prepare("SELECT pass FROM users WHERE username = ?;");
+        $statement->bind_param("s", $_POST["username"]);
+
+        $statement->execute();
+        $statement->bind_result($password_hash);
+        
+        if ($statement->fetch() && password_verify($_POST["password"], $password_hash)) {
+            // Password is correct, store the username to indicate authentication
+            $_SESSION["username"] = $_POST["username"];
+            
+            // Redirect to index.html upon successful login
+            header("Location: index.html");
+            exit;
+        } else {
+            // Invalid username or password
+            $error = true;
+        }
+    }
+}
 ?>
+<!DOCTYPE html>
+<html>
+<body>
+<?php
+if ($error) {
+    echo "<p style='color: red;'>Username or password incorrect.</p>";
+}
+?>
+<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
+    <label for="username">Username</label>
+    <input name="username" type="text" value="<?php if (isset($_POST["username"])) echo $_POST["username"]; ?>" />
+    <label for="password">Password</label>
+    <input name="password" type="password" />
+    <input type="submit" value="Log in" />
+</form>
+</body>
+</html>
