@@ -12,22 +12,6 @@
             		background-color: #f0f0f0; /* Light gray background */
             		margin: 0;
         	}
-        	header {
-        		width: 100%;
-        		background-color: #333;
-        		color: #fff;
-        		padding: 10px 0;
-        		text-align: center;
-        	}
-        	header a {
-        		color: #fff;
-        		text-decoration: none;
-        		margin: 0 10px;
-        		font-weight: bold;
-        	}
-        	header a:hover {
-        		text-decoration: underline;
-        	}
 
         	.flashcard-container {
             		display: flex;
@@ -76,7 +60,7 @@
 	</style>
 </head>
 <body>
-
+	<center>
 	<header>
 		<a href="index.html">Home Page</a> |
         	<a href="flashcards.php">Flashcards</a> |
@@ -122,6 +106,7 @@
          	$conn->close();
          	?>
          </div>
+         </center>
 </body>
 </html>               		
                 		
