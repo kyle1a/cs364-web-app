@@ -5,10 +5,24 @@
 	<title>Study Buddy Flashcards</title>
 	<link rel ="stylesheet" href="csl.css" id="styleSheet">
 	<style>
+		body {
+            		display: flex;
+           		justify-content: center;
+            		align-items: center;
+            		height: 100vh; /* Full viewport height */
+            		background-color: #f0f0f0; /* Light gray background */
+            		margin: 0;
+        	}
+
+        	.flashcard-container {
+            		display: flex;
+            		flex-wrap: wrap;
+            		justify-content: center;
+            		gap: 20px;
+        	}
 		.card-wrapper {
 			width: 300px;
 			height: 200px; 
-			margin: 20px;
 			cursor: pointer;
 			perspective: 1000px;
 		}
@@ -32,18 +46,28 @@
 			justify-content: center;
 			font-size: 16px;
 			padding: 10px;
-			color: #fff;
-			border: 1px solid #ccc;
-			background-color: #007BFF;
+			color: #000;
+			border: 2px solid #ccc;
+			border-radius: 8px;
+			background-color: #fff;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 		}
 		.card-back {
-			background-color: #28A745;
 			transform: rotateY(180deg);
 		}
 	</style>
 </head>
 <body>
-	<div style="text-align: center;">
+
+	<nav>
+		<a href="index.html">Home Page</a> |
+        	<a href="flashcards.php">Flashcards</a> |
+        	<a href="questions.html">Create Questions</a> |
+        	<a href="testpage.html">Generate Test</a> |
+        	<a href="missedQuestions.html">Missed Questions</a> | 
+   		<a href="questionBank.html">Question Bank</a>
+	</nav>
+	<div class="flashcard-container">
 		<h1>Flashcards</h1>
 		<?php
 		
