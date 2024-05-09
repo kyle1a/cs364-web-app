@@ -34,7 +34,7 @@
          
             
            
-            $SQL_all_answers = "SELECT answer FROM Questions;";
+            $SQL_all_answers = "SELECT answer, question FROM Questions;";
             $result_all_answers = $connect->query($SQL_all_answers);
             $all_answers = [];
             while ($row = $result_all_answers->fetch_assoc()) {
@@ -45,6 +45,7 @@
                 // Output data for each row
                 $a = 0;
                 while ($row = $result->fetch_assoc()) { 
+
                     echo "<p>" . htmlspecialchars($row["question"]) . "</p>";
                     // Generate a set of answers for the question
                     $answers = [$row["answer"]];
@@ -59,7 +60,10 @@
                     
                     echo '<div class="inline-radio">';
                     for ($i = 0; $i < 4; $i++) {
-                        echo "<input type=\"radio\" id=\"q$a$i\" name=\"q$a\" value=\"q$a$i\"> <label for=\"q$a$i\">" . htmlspecialchars($answers[$i]) . "</label><div>";  
+                    	$thisanswer = htmlspecialchars($answers[$i]);
+                 	$thisquestion = $row["question"];
+                 	echo $thisquestion;
+                        echo " <input type=\"hidden\" name=\"question\" value=\"$thisquestion\"><input type=\"radio\" id=\"q$a$i\" name=\"q$a\" value=\"$thisanswer\"> <label for=\"q$a$i\">" . htmlspecialchars($answers[$i]) . "</label><div>";  
                     }
                     echo '</div>';
                     $a++;
