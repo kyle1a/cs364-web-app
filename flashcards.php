@@ -7,18 +7,36 @@
 	<style>
 		body {
             		display: flex;
-           		justify-content: center;
+           		flex-direction: column;
             		align-items: center;
-            		height: 100vh; /* Full viewport height */
             		background-color: #f0f0f0; /* Light gray background */
             		margin: 0;
+        	}
+        	header {
+        		width: 100%;
+        		background-color: #333;
+        		color: #fff;
+        		padding: 10px 0;
+        		text-align: center;
+        	}
+        	header a {
+        		color: #fff;
+        		text-decoration: none;
+        		margin: 0 10px;
+        		font-weight: bold;
+        	}
+        	header a:hover {
+        		text-decoration: underline;
         	}
 
         	.flashcard-container {
             		display: flex;
-            		flex-wrap: wrap;
+            		flex-direction: column;
             		justify-content: center;
             		gap: 20px;
+            		padding: 20px;
+            		width: 100%;
+            		max-width: 500px;
         	}
 		.card-wrapper {
 			width: 300px;
@@ -59,14 +77,14 @@
 </head>
 <body>
 
-	<nav>
+	<header>
 		<a href="index.html">Home Page</a> |
         	<a href="flashcards.php">Flashcards</a> |
         	<a href="questions.html">Create Questions</a> |
         	<a href="testpage.html">Generate Test</a> |
         	<a href="missedQuestions.html">Missed Questions</a> | 
    		<a href="questionBank.html">Question Bank</a>
-	</nav>
+	</header>
 	<div class="flashcard-container">
 		<h1>Flashcards</h1>
 		<?php
@@ -81,7 +99,7 @@
 			die("Connection failed: " . $conn->connect_error);
 		}
 		
-		$sql = 'SELECT question, answer FROM Questions;
+		$sql = 'SELECT question, answer FROM Questions';
 		$result = $conn->query($sql);
 		
 		if ($result->num_rows > 0) {
@@ -98,7 +116,7 @@
                 		echo '</div>';
                 	}
                 } else {
-                	echo '<p>No questions</p>;
+                	echo '<p>No questions</p>';
                 }
                 
          	$conn->close();
